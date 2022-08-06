@@ -13,6 +13,9 @@ public class ChangePlayerController : MonoBehaviour
     [SerializeField]
     private Animator Anim;
 
+    [SerializeField]
+    float duration_time = 2f;
+
     private void Awake() {
         Random_bird();
      }
@@ -31,4 +34,24 @@ public class ChangePlayerController : MonoBehaviour
         // set animation cho player;
         Anim.SetInteger("Player", a);
     }
+    //hàm chuyển màu player sang grayscale;
+    public void ChangeColorPlayerDead(){
+        StartCoroutine(GrayscaleRoutine());
+    }
+    //chuyển dần từ từ màu sắc sang màu đen trắng
+    public IEnumerator GrayscaleRoutine(){
+        float time = 0;
+        while(duration_time > time){
+            float duration_frame = Time.deltaTime;
+            float ratio = time/duration_time;
+            SetGrayScale(ratio);
+            time += duration_frame;
+            yield return null;
+        }
+    }
+    //đặt giá trị của grayscale
+    public void SetGrayScale(float amount){
+        flapp_bird.material.SetFloat("_GrayscaleAmount", amount);
+    }
+    
 }

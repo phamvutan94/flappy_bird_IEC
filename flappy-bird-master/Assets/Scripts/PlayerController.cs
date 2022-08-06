@@ -9,12 +9,13 @@ public class PlayerController : MonoBehaviour {
 	private float timer, tiltSmooth, y;
 	private Rigidbody2D playerRigid;
 	private Quaternion downRotation, upRotation;
-
+	private ChangePlayerController changePlayer;
 	void Start () {
 		tiltSmooth = maxTiltSmooth;
 		playerRigid = GetComponent<Rigidbody2D> ();
 		downRotation = Quaternion.Euler (0, 0, -90);
 		upRotation = Quaternion.Euler (0, 0, 35);
+		changePlayer = GetComponent<ChangePlayerController>();
 	}
 
 	void Update () {
@@ -74,6 +75,8 @@ public class PlayerController : MonoBehaviour {
 			playerRigid.simulated = false;
 			KillPlayer ();
 			transform.rotation = downRotation;
+			//đổi màu khi chết
+			changePlayer.ChangeColorPlayerDead();
 		}
 	}
 
