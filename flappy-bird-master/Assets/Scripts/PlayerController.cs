@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour {
 		playerRigid = GetComponent<Rigidbody2D> ();
 		downRotation = Quaternion.Euler (0, 0, -90);
 		upRotation = Quaternion.Euler (0, 0, 35);
-		changePlayer = GetComponent<ChangePlayerController>();
 	}
 
 	void Update () {
@@ -75,8 +74,6 @@ public class PlayerController : MonoBehaviour {
 			playerRigid.simulated = false;
 			KillPlayer ();
 			transform.rotation = downRotation;
-			//đổi màu khi chết
-			changePlayer.ChangeColorPlayerDead();
 		}
 	}
 
@@ -85,6 +82,8 @@ public class PlayerController : MonoBehaviour {
 		playerRigid.velocity = Vector2.zero;
 		// Stop the flapping animation
 		GetComponent<Animator> ().enabled = false;
+		// doi mau player
+		changePlayer.ChangeColorPlayerDead();
 	}
-
+	
 }
